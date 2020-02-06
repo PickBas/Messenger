@@ -21,7 +21,7 @@ If you find a bug, please text me in Telegram: @PickBas. I appreciate your feedb
 
 # Downloading
 
-You can find latest version of my KS Messenger here: https://github.com/PickBas/Messenger_bin
+You can find latest version of my KS Messenger here: https://github.com/PickBas/Messenger/releases
 Or you can build this program by yourself using this repo.
 
 # Enjoy!
