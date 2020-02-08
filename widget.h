@@ -29,6 +29,7 @@ public:
     QTcpSocket *socket;
     QtServer *server;
     void reading_text();
+    void reading_file();
     void connection_to_server(QString host, quint16 port, QString nick);
     void setup_connection();
 
@@ -37,10 +38,12 @@ private slots:
     void on_save_btn_clicked();
     void show_info();
     void connection_failure();
+    void send_file();
 
 private:
     Ui::Widget *ui;
     QShortcut *shortcut_save;
+    QShortcut *shortcut_send_file;
     QShortcut *shortcut_info;
     QSystemTrayIcon* tray;
 };

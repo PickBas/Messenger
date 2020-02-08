@@ -15,6 +15,7 @@ Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget){
 
     tray->setIcon(QIcon(":/pic/icon.ico"));
     tray->show();
+
     setup_connection();
 
     shortcut_save = new QShortcut(QKeySequence("Ctrl+s"), this);
@@ -22,6 +23,9 @@ Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget){
 
     shortcut_info = new QShortcut(QKeySequence("Ctrl+i"), this);
     connect(shortcut_info, SIGNAL(activated()), this, SLOT(show_info()));
+
+    shortcut_send_file = new QShortcut(QKeySequence("Ctrl+f"), this);
+    connect(shortcut_send_file, SIGNAL(activated()), this, SLOT(send_file()));
 
     connect(this->socket, &QTcpSocket::readyRead, [&](){
             this->reading_text();
@@ -37,6 +41,20 @@ Widget::~Widget(){
     delete shortcut_save;
     delete shortcut_info;
     delete tray;
+}
+
+void Widget::send_file() {
+    QString fileName = QFileDialog::getOpenFileName(this, "Open");
+    QFile file(fileName);
+
+    if (!file.open(QFile::ReadOnly)) {
+        QMessageBox::warning(this, "Warning", "Cannot open file: " + file.errorString());
+        return;
+    }
+
+    QByteArray data = file.readAll();
+    socket->write(data);
+
 }
 
 void Widget::reading_text(){
@@ -72,6 +90,7 @@ void Widget::setup_connection(){
         if (d.exec() == QDialog::Rejected)
             exit(1);
         connection_to_server(d.get_host(), d.get_port(), d.get_nick());
+        socket->waitForConnected();
     } else {
         Dialog_creating_server d(this);
         if (d.exec() == Dialog_creating_server::Rejected)
@@ -85,6 +104,7 @@ void Widget::setup_connection(){
         else
             qDebug() << "Server started...\n";
         connection_to_server("127.0.0.1", d.get_port(), d.get_nick());
+        socket->waitForConnected();
     }
 }
 
