@@ -15,31 +15,30 @@ Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget){
 
     tray->setIcon(QIcon(":/pic/icon.ico"));
     tray->show();
-    setup_connection();
+    setupConnection();
 
-    shortcut_save = new QShortcut(QKeySequence("Ctrl+s"), this);
-    connect(shortcut_save, SIGNAL(activated()), this, SLOT(on_save_btn_clicked()));
+    shortcutSave = new QShortcut(QKeySequence("Ctrl+s"), this);
+    connect(shortcutSave, SIGNAL(activated()), this, SLOT(on_save_btn_clicked()));
 
-    shortcut_info = new QShortcut(QKeySequence("Ctrl+i"), this);
-    connect(shortcut_info, SIGNAL(activated()), this, SLOT(show_info()));
+    shortcutInfo = new QShortcut(QKeySequence("Ctrl+i"), this);
+    connect(shortcutInfo, SIGNAL(activated()), this, SLOT(show_info()));
 
     connect(this->socket, &QTcpSocket::readyRead, [&](){
-            this->reading_text();
+            this->readingText();
     });
 
 }
-
 
 Widget::~Widget(){
     delete ui;
     delete socket;
     delete server;
-    delete shortcut_save;
-    delete shortcut_info;
+    delete shortcutSave;
+    delete shortcutInfo;
     delete tray;
 }
 
-void Widget::reading_text(){
+void Widget::readingText(){
     QTextStream text(socket);
     auto text_to_append = text.readAll();
     if (this->nick == text_to_append.left(nick.size()) && text_to_append[nick.size()] == ':'){
@@ -54,7 +53,7 @@ void Widget::reading_text(){
     }
 }
 
-void Widget::connection_to_server(QString host, quint16 port, QString nick){
+void Widget::connectionToServer(QString host, quint16 port, QString nick){
     this->nick = nick;
     this->socket->connectToHost(host, port);
     connect(socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(connection_failure()), Qt::DirectConnection);
@@ -64,14 +63,14 @@ void Widget::connection_to_server(QString host, quint16 port, QString nick){
 
 }
 
-void Widget::setup_connection(){
+void Widget::setupConnection(){
     qint8 reply = QMessageBox::question(this, "Connection", "Do you want to create your own server or connect to a server?",
                                         "Create", "Connect");
     if (reply == 1) {
         Dialog d(this);
         if (d.exec() == QDialog::Rejected)
             exit(1);
-        connection_to_server(d.get_host(), d.get_port(), d.get_nick());
+        connectionToServer(d.get_host(), d.get_port(), d.get_nick());
     } else {
         Dialog_creating_server d(this);
         if (d.exec() == Dialog_creating_server::Rejected)
@@ -84,7 +83,7 @@ void Widget::setup_connection(){
         }
         else
             qDebug() << "Server started...\n";
-        connection_to_server("127.0.0.1", d.get_port(), d.get_nick());
+        connectionToServer("127.0.0.1", d.get_port(), d.get_nick());
     }
 }
 
@@ -122,8 +121,6 @@ void Widget::connection_failure(){
     if (reply == 1)
         exit(1);
     else
-        setup_connection();
+        setupConnection();
 
 }
-
-//Bpm xzwoziu'a icbpwz qa Sqzqtt Aigml. Owwl tcks!
