@@ -1,4 +1,4 @@
-#include "QtSocket.h"
+#include "headers/QtSocket.h"
 
 QtSocket::QtSocket(qintptr handle, QObject *parent) : QTcpSocket(parent){
     setSocketDescriptor(handle);

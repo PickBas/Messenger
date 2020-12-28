@@ -1,4 +1,4 @@
-#include "dialog_creating_server.h"
+#include "headers/dialog_creating_server.h"
 #include "ui_dialog_creating_server.h"
 
 Dialog_creating_server::Dialog_creating_server(QWidget *parent) :

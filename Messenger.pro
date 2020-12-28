@@ -6,28 +6,11 @@ CONFIG += c++14
 
 DEFINES += QT_DEPRECATED_WARNINGS
 
-SOURCES +=  \
-    src/QtServer.cpp \
-    src/QtSocket.cpp \
-    src/dialog.cpp \
-    src/dialog_creating_server.cpp \
-    src/info.cpp \
-    src/main.cpp \
-    src/widget.cpp
+SOURCES += $$files(src/*.cpp)
 
-HEADERS += \
-    include/QtServer.h \
-    include/QtSocket.h \
-    include/dialog.h \
-    include/dialog_creating_server.h \
-    include/info.h \
-    include/widget.h
+HEADERS += $$files(headers/*.h)
 
-FORMS += \
-    ui/dialog.ui \
-    ui/dialog_creating_server.ui \
-    ui/info.ui \
-    ui/widget.ui
+FORMS += $$files(ui/*.ui)
 
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
