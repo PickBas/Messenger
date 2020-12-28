@@ -10,9 +10,9 @@
 #include <QString>
 #include <QSystemTrayIcon>
 #include <QTextCodec>
-#include "info.h"
+#include "headers/info.h"
 #include "QtServer.h"
-#include "dialog.h"
+#include "headers/dialog.h"
 #include "dialog_creating_server.h"
 
 QT_BEGIN_NAMESPACE
