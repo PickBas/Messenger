@@ -1,4 +1,4 @@
-#include "info.h"
+#include "headers/info.h"
 #include "ui_info.h"
 
 info::info(QWidget *parent) : QDialog(parent), ui(new Ui::info){

@@ -10,10 +10,11 @@
 #include <QString>
 #include <QSystemTrayIcon>
 #include <QTextCodec>
-#include "info.h"
-#include "QtServer.h"
-#include "dialog.h"
-#include "dialog_creating_server.h"
+
+#include "headers/info.h"
+#include "headers/QtServer.h"
+#include "headers/dialog.h"
+#include "headers/dialog_creating_server.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -28,9 +29,9 @@ public:
     QString nick;
     QTcpSocket *socket;
     QtServer *server;
-    void reading_text();
-    void connection_to_server(QString host, quint16 port, QString nick);
-    void setup_connection();
+    void readingText();
+    void connectionToServer(QString host, quint16 port, QString nick);
+    void setupConnection();
 
 private slots:
     void on_send_btn_clicked();
@@ -40,8 +41,9 @@ private slots:
 
 private:
     Ui::Widget *ui;
-    QShortcut *shortcut_save;
-    QShortcut *shortcut_info;
+    QShortcut *shortcutSave;
+    QShortcut *shortcutInfo;
     QSystemTrayIcon* tray;
 };
+
 #endif // WIDGET_H

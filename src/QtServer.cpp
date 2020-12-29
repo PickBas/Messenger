@@ -1,4 +1,4 @@
-#include "QtServer.h"
+#include "headers/QtServer.h"
 
 QtServer::QtServer(QObject *parent) : QTcpServer(parent){}
 

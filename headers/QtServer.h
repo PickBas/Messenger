@@ -7,7 +7,7 @@
 #include <QTextStream>
 #include <QDebug>
 #include <QObject>
-#include "QtSocket.h"
+#include "headers/QtSocket.h"
 
 class QtSocket;
 
