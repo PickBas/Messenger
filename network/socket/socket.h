@@ -8,6 +8,7 @@ class Socket : public QTcpSocket {
     Q_OBJECT
 public:
     explicit Socket(qintptr socketDesc, QObject *parent = nullptr);
+    QString readToString();
 
 signals:
     void MsReadyRead(Socket *);

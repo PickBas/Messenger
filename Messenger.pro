@@ -10,12 +10,14 @@ SOURCES += \
     main.cpp \
     main_window.cpp \
     network/server/server.cpp \
-    network/socket/socket.cpp
+    network/socket/socket.cpp \
+    network/socket/socket_management.cpp
 
 HEADERS += \
     main_window.h \
     network/server/server.h \
-    network/socket/socket.h
+    network/socket/socket.h \
+    network/socket/socket_management.h
 
 FORMS += \
     main_window.ui

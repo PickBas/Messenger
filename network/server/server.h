@@ -4,10 +4,11 @@
 #include <QObject>
 #include <QTcpServer>
 #include "network/socket/socket.h"
+#include "network/socket/socket_management.h"
 
 class Server : public QTcpServer {
     Q_OBJECT
-    QList<Socket*> socketList;
+    SocketManagement* socketManagement;
 protected:
     void incomingConnections(qintptr socketDesc);
 public:

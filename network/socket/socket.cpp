@@ -10,3 +10,8 @@ Socket::Socket(qintptr socketDesc, QObject *parent)
         emit MsStateChanged(this, state);
     });
 }
+
+QString Socket::readToString() {
+    QTextStream incomingTextStream(this);
+    return incomingTextStream.readAll();
+}
