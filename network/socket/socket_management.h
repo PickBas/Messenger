@@ -11,7 +11,6 @@ public:
     explicit SocketManagement(QList<Socket*> socketList, QObject *parent = nullptr);
     void addSocket(Socket* socket);
     void removeSocket(Socket* socket, qint32 state);
-
 public slots:
     void writeData(Socket* incomingSocket);
 };

@@ -9,11 +9,9 @@ class Socket : public QTcpSocket {
 public:
     explicit Socket(qintptr socketDesc, QObject *parent = nullptr);
     QString readToString();
-
 signals:
     void MsReadyRead(Socket *);
     void MsStateChanged(Socket *, int);
-
 };
 
 #endif // SOCKET_H
