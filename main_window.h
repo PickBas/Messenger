@@ -2,9 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMessageBox>
 #include <QTcpSocket>
 #include <QTextCodec>
 #include "network/server/server.h"
+#include "network/server/dialogs/host_dialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -15,10 +17,14 @@ class MainWindow : public QMainWindow {
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+private slots:
+    void on_actionConnect_triggered();
+    void on_actionHost_triggered();
 private:
     Ui::MainWindow *ui;
     QTcpSocket* socket;
     Server* server;
+    QString userNick;
 };
 
 #endif // MAINWINDOW_H

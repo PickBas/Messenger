@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -61,7 +61,37 @@
      <height>24</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionSave"/>
+   </widget>
+   <widget class="QMenu" name="menuConnection">
+    <property name="title">
+     <string>Connection</string>
+    </property>
+    <addaction name="actionConnect"/>
+    <addaction name="actionHost"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuConnection"/>
   </widget>
+  <action name="actionConnect">
+   <property name="text">
+    <string>Connect</string>
+   </property>
+  </action>
+  <action name="actionHost">
+   <property name="text">
+    <string>Host</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

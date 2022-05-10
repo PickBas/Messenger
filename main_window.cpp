@@ -11,5 +11,29 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow() {
     delete ui;
+    delete socket;
+    delete server;
+}
+
+
+void MainWindow::on_actionConnect_triggered() {
+
+
+}
+
+
+void MainWindow::on_actionHost_triggered() {
+    HostDialog* dialog = new HostDialog(this);
+    if (dialog->exec() == 1) {
+        server = new Server(this);
+        if (!server->startServer(dialog->port)) {
+            QMessageBox::warning(
+                        this,
+                        "Error",
+                        "Server error: " + server->errorString(),
+                        "Close");
+        }
+        userNick = dialog->nick;
+    }
 }
 
