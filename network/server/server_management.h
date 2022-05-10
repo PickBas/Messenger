@@ -19,8 +19,6 @@ public:
     ~ServerManagement();
     void hostServer(quint16 port);
     void connectToServer(QString nick, QString host, quint16 port);
-private slots:
-    void connectionFailure();
 };
 
 

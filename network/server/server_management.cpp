@@ -27,15 +27,11 @@ void ServerManagement::hostServer(quint16 port) {
 void ServerManagement::connectToServer(QString nick, QString host, quint16 port) {
     socket->connectToHost(host, port);
     connect(socket,
-            SIGNAL(error(QAbstractSocket::SocketError)),
+            &QAbstractSocket::errorOccurred,
             this,
-            SLOT(connectionFailure()),
+            [&](QAbstractSocket::SocketError socError) {qDebug() << socError;},
             Qt::DirectConnection);
     QTextStream text(socket);
     text << "User \"" << nick << "\" connected!";
     socket->flush();
-}
-
-void ServerManagement::connectionFailure() {
-    QMessageBox::warning(mainWindow, "Error", "Connection failed!");
 }
