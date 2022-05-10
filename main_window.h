@@ -5,8 +5,10 @@
 #include <QMessageBox>
 #include <QTcpSocket>
 #include <QTextCodec>
-#include "network/server/server.h"
+
+#include "network/server/server_management.h"
 #include "network/server/dialogs/host_dialog.h"
+#include "network/socket/dialogs/connect_dialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -22,8 +24,7 @@ private slots:
     void on_actionHost_triggered();
 private:
     Ui::MainWindow *ui;
-    QTcpSocket* socket;
-    Server* server;
+    ServerManagement* serverManagement;
     QString userNick;
 };
 

@@ -1,8 +1,13 @@
 #include "socket_management.h"
 
-SocketManagement::SocketManagement(QList<Socket*> socketList, QObject *parent)
+SocketManagement::SocketManagement(QObject *parent)
     : QObject{parent} {
-    this->socketList = socketList;
+}
+
+SocketManagement::~SocketManagement() {
+    for (Socket*& i : socketList) {
+        delete i;
+    }
 }
 
 void SocketManagement::addSocket(Socket *socket) {
@@ -15,8 +20,7 @@ void SocketManagement::removeSocket(Socket *socket, qint32 state) {
     }
 }
 
-void SocketManagement::writeData(Socket* incomingSocket)
-{
+void SocketManagement::writeData(Socket* incomingSocket) {
     QString text = incomingSocket->readToString();
     for (Socket* socket : socketList){
         QTextStream outcomingTextStream(socket);

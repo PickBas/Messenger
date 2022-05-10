@@ -13,6 +13,8 @@ SOURCES += \
     main_window.cpp \
     network/server/dialogs/host_dialog.cpp \
     network/server/server.cpp \
+    network/server/server_management.cpp \
+    network/socket/dialogs/connect_dialog.cpp \
     network/socket/socket.cpp \
     network/socket/socket_management.cpp
 
@@ -20,12 +22,15 @@ HEADERS += \
     main_window.h \
     network/server/dialogs/host_dialog.h \
     network/server/server.h \
+    network/server/server_management.h \
+    network/socket/dialogs/connect_dialog.h \
     network/socket/socket.h \
     network/socket/socket_management.h
 
 FORMS += \
     main_window.ui \
-    network/server/dialogs/host_dialog.ui
+    network/server/dialogs/host_dialog.ui \
+    network/socket/dialogs/connect_dialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

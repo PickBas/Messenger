@@ -11,7 +11,7 @@ class HostDialog : public QDialog {
     Q_OBJECT
 public:
     QString nick;
-    quint32 port;
+    quint16 port;
     explicit HostDialog(QWidget *parent = nullptr);
     ~HostDialog();
 private slots:

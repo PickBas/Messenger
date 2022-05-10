@@ -1,8 +1,12 @@
 #include "server.h"
 
-Server::Server(QObject *parent) : QTcpServer{parent} {}
+Server::Server(QObject *parent) : QTcpServer{parent} {
+    socketManagement = new SocketManagement(this);
+}
 
-Server::~Server() {}
+Server::~Server() {
+    delete socketManagement;
+}
 
 bool Server::startServer(quint16 port) {
     return listen(QHostAddress::Any, port);

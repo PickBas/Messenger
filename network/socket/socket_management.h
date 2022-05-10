@@ -8,7 +8,8 @@ class SocketManagement : public QObject {
     Q_OBJECT
     QList<Socket*> socketList;
 public:
-    explicit SocketManagement(QList<Socket*> socketList, QObject *parent = nullptr);
+    explicit SocketManagement(QObject *parent = nullptr);
+    ~SocketManagement();
     void addSocket(Socket* socket);
     void removeSocket(Socket* socket, qint32 state);
 public slots:
