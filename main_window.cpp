@@ -5,6 +5,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     serverManagement = new ServerManagement(this, ui->messageDisplayBox);
+    fileManagement = nullptr;
     QTextCodec* codec = QTextCodec::codecForName("UTF-8");
     QTextCodec::setCodecForLocale(codec);
 }
@@ -12,6 +13,9 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow() {
     delete ui;
     delete serverManagement;
+    if (fileManagement != nullptr) {
+        delete fileManagement;
+    }
 }
 
 void MainWindow::on_actionConnect_triggered() {
@@ -39,5 +43,13 @@ void MainWindow::on_sendMessageBtn_clicked() {
     }
     serverManagement->sendMessage(ui->messageInput->text());
     ui->messageInput->clear();
+}
+
+
+void MainWindow::on_actionSave_triggered() {
+    auto text = ui->messageDisplayBox->toPlainText();
+    QString fileName = QFileDialog::getSaveFileName(this, "Save as");
+    fileManagement = new FileManagement(fileName);
+    fileManagement->saveMessagesToFile(text);
 }
 

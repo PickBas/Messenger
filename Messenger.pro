@@ -9,6 +9,7 @@ CONFIG += c++17
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000
 
 SOURCES += \
+    file_management/file_management.cpp \
     main.cpp \
     main_window.cpp \
     network/server/dialogs/host_dialog.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
     network/socket/socket_management.cpp
 
 HEADERS += \
+    file_management/file_management.h \
     main_window.h \
     network/server/dialogs/host_dialog.h \
     network/server/server.h \
