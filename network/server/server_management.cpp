@@ -25,6 +25,7 @@ void ServerManagement::hostServer(QString nick, quint16 port) {
                              "Close");
     }
     this->nick=nick;
+    this->connectToServer(this->nick, "127.0.0.1", port);
 }
 
 void ServerManagement::connectToServer(QString nick, QString host, quint16 port) {
@@ -37,6 +38,12 @@ void ServerManagement::connectToServer(QString nick, QString host, quint16 port)
     this->nick = nick;
     QTextStream text(socket);
     text << "User \"" << nick << "\" connected!";
+    socket->flush();
+}
+
+void ServerManagement::sendMessage(QString message) {
+    QTextStream messageStream(socket);
+    messageStream << this->nick << ": " << message;
     socket->flush();
 }
 

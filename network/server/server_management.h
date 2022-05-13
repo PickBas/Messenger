@@ -24,6 +24,7 @@ public:
     ~ServerManagement();
     void hostServer(QString nick, quint16 port);
     void connectToServer(QString nick, QString host, quint16 port);
+    void sendMessage(QString message);
 private slots:
     void readIncomingData();
 };

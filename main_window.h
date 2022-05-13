@@ -22,6 +22,8 @@ public:
 private slots:
     void on_actionConnect_triggered();
     void on_actionHost_triggered();
+    void on_sendMessageBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
     ServerManagement* serverManagement;

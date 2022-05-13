@@ -17,7 +17,9 @@ MainWindow::~MainWindow() {
 void MainWindow::on_actionConnect_triggered() {
     ConnectDialog* dialog = new ConnectDialog(this);
     if (dialog->exec() == 1) {
-        serverManagement->connectToServer(dialog->nick, dialog->host, dialog->port);
+        serverManagement->connectToServer(dialog->nick,
+                                          dialog->host,
+                                          dialog->port);
     }
     delete dialog;
 }
@@ -28,5 +30,14 @@ void MainWindow::on_actionHost_triggered() {
         serverManagement->hostServer(dialog->nick, dialog->port);
     }
     delete dialog;
+}
+
+
+void MainWindow::on_sendMessageBtn_clicked() {
+    if (ui->messageInput->text().isEmpty()) {
+        return;
+    }
+    serverManagement->sendMessage(ui->messageInput->text());
+    ui->messageInput->clear();
 }
 
