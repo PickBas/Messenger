@@ -12,7 +12,7 @@ bool Server::startServer(quint16 port) {
     return listen(QHostAddress::Any, port);
 }
 
-void Server::incomingConnections(qintptr socketDesc) {
+void Server::incomingConnection(qintptr socketDesc) {
     Socket* socket = new Socket(socketDesc, this);
     socketManagement->addSocket(socket);
     connect(socket,

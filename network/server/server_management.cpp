@@ -1,10 +1,14 @@
 #include "server_management.h"
 
-ServerManagement::ServerManagement(QMainWindow* mainWindow, QObject *parent)
+ServerManagement::ServerManagement(QMainWindow* mainWindow, QTextEdit* messageDisplayBox, QObject *parent)
     : QObject{parent} {
     this->mainWindow = mainWindow;
     socket = new QTcpSocket(this);
     server = nullptr;
+    this->messageDisplayBox = messageDisplayBox;
+    connect(socket, &QTcpSocket::readyRead, this, [&](){
+        readIncomingData();
+    });
 }
 
 ServerManagement::~ServerManagement() {
@@ -14,7 +18,7 @@ ServerManagement::~ServerManagement() {
     }
 }
 
-void ServerManagement::hostServer(quint16 port) {
+void ServerManagement::hostServer(QString nick, quint16 port) {
     server = new Server(this);
     if (!server->startServer(port)) {
         QMessageBox::warning(mainWindow,
@@ -22,6 +26,7 @@ void ServerManagement::hostServer(quint16 port) {
                              "Server error: " + server->errorString(),
                              "Close");
     }
+    this->nick=nick;
 }
 
 void ServerManagement::connectToServer(QString nick, QString host, quint16 port) {
@@ -31,7 +36,20 @@ void ServerManagement::connectToServer(QString nick, QString host, quint16 port)
             this,
             [&](QAbstractSocket::SocketError socError) {qDebug() << socError;},
             Qt::DirectConnection);
+    this->nick = nick;
     QTextStream text(socket);
     text << "User \"" << nick << "\" connected!";
     socket->flush();
+}
+
+void ServerManagement::readIncomingData() {
+    QTextStream text(socket);
+    QString textToAppend = text.readAll();
+    if (nick == textToAppend.left(nick.size()) && textToAppend[nick.size()] == ':'){
+        messageDisplayBox->setAlignment(Qt::AlignRight);
+        messageDisplayBox->append(textToAppend.mid(nick.size() + 2, textToAppend.size() - 1) + "\n");
+    } else {
+        messageDisplayBox->setAlignment(Qt::AlignLeft);
+        messageDisplayBox->append(textToAppend + "\n");
+    }
 }

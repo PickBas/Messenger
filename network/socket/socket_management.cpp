@@ -22,7 +22,7 @@ void SocketManagement::removeSocket(Socket *socket, qint32 state) {
 
 void SocketManagement::writeData(Socket* incomingSocket) {
     QString text = incomingSocket->readToString();
-    for (Socket* socket : socketList){
+    for (Socket*& socket : socketList){
         QTextStream outcomingTextStream(socket);
         outcomingTextStream << text;
         socket->flush();

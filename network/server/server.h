@@ -10,7 +10,7 @@ class Server : public QTcpServer {
     Q_OBJECT
     SocketManagement* socketManagement;
 protected:
-    void incomingConnections(qintptr socketDesc);
+    void incomingConnection(qintptr socketDesc);
 public:
     explicit Server(QObject *parent = nullptr);
     ~Server();
