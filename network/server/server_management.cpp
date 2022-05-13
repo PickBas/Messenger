@@ -6,9 +6,7 @@ ServerManagement::ServerManagement(QMainWindow* mainWindow, QTextEdit* messageDi
     socket = new QTcpSocket(this);
     server = nullptr;
     this->messageDisplayBox = messageDisplayBox;
-    connect(socket, &QTcpSocket::readyRead, this, [&](){
-        readIncomingData();
-    });
+    connect(socket, &QTcpSocket::readyRead, this, &ServerManagement::readIncomingData);
 }
 
 ServerManagement::~ServerManagement() {
